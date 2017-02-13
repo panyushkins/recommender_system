@@ -29,7 +29,7 @@ def save_to_file(file_name, save_file):
 def download_films(token):
     films = dict()
     i = 1
-    while len(films) < 10:
+    while len(films) < 1000:
         try:
             films[i] = make_tmdb_api_request(method='/movie/' + str(i), api_key=token)
             get_lists = make_tmdb_api_request(method='/movie/' + str(i) + '/lists', api_key=token)
