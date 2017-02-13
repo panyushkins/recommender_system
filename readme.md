@@ -1,3 +1,5 @@
+This project was made in Styleru.py school.
+
 **Get budget app**:
 In this application you can get budget by film ID from TMDB. 
 Firstly, you need input your API key from TMDB. Secondly - TMDB's film ID. 
