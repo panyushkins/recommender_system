@@ -13,7 +13,6 @@ word = input('Input a word from film title: ')
 
 films_dict = read_from_file(path)
 
-
 for i in films_dict:
     if films_dict[i]['title'].find(word) >= 0:
         print(films_dict[i]['title'])

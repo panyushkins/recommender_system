@@ -19,10 +19,7 @@ def make_tmdb_api_request(method, api_key, extra_params=None):
     params.update(extra_params)
     return load_json_data_from_url(url, params)
 
-print('Input API key: ')
-api_token = input()  # 7af57f1d1d0dc0d0b5193a0a5317021c
-
-print('Input film ID: ')
-film_number = int(input())
+api_token = input('Input API key: ')
+film_number = int(input('Input film ID: '))
 
 print('The budget is: '+str(make_tmdb_api_request(method='/movie/'+str(film_number), api_key=api_token)['budget']))

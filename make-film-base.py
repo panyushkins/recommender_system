@@ -26,11 +26,9 @@ def save_to_file(filename, save_file):
     print('Data saved to ' + filename)
 
 Films = dict()
-print('Input API key: ')
-api_token = input()
 
-print('Input destination path to file: ')
-filename = input()
+api_token = input('Input API key: ')
+filename = input('Input destination path to file: ')
 
 i = 1
 while len(Films) < 1000:
