@@ -19,11 +19,17 @@ def make_tmdb_api_request(method, api_key, extra_params=None):
     params.update(extra_params)
     return load_json_data_from_url(url, params)
 
+
+def save_to_file(filename, save_file):
+    with open(filename, 'w') as file:
+        file.write(save_file)
+    print('Data saved to ' + filename)
+
 Films = dict()
-print('Введите API key: ')
+print('Input API key: ')
 api_token = input()
 
-print('Введите путь (название) файла: ')
+print('Input destination path to file: ')
 filename = input()
 
 i = 1
@@ -38,9 +44,7 @@ while len(Films) < 1000:
         if e.code == 404:  # если 404 - пропускаем этот ID
             i += 1
 
-print('Все скачалось')
-k = json.dumps(Films)
+print('Downloaded!')
+serialized_films = json.dumps(Films)
 
-with open(filename, 'w') as file:
-    file.write(k)
-print('Данные сохранены в файл ' + filename)
+save_to_file(filename, serialized_films)
