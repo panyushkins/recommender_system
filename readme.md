@@ -9,15 +9,19 @@ In this application you can get budget by film ID from TMDB.
 Firstly, you need input your API key from TMDB. Secondly - TMDB's film ID. 
 After execution of the program, the budget will be printed in console. 
 
+You can start the application with cmd: `python get-budget.py`. 
 ####Make film base (`make-film-db.py`)
 The application downloads information about 1000 first films to dict-type variable, serializes it to JSON and saves it to file.
 
 User should input TMDB's API key, and a path to saved file. When application completed in console will be printed "Data saved to [destination-file-path]"
 
+You can start the application with cmd: `python make-film-db.py`. 
 ####Find title (`find-title.py`)
 In this application we are finding all titles in our file (from application "Make film base"), that contains inputted word (or substring).
 
 User should input the path to the base of films and the word (substring).
+
+You can start the application with cmd: `python find-title.py`. 
 
 ####Recommender system (`recommender-system.py`)
 In this application works primitive recommend system. User should enter a title of movie, after it the program print the most relevant movies for the user's request.
@@ -35,3 +39,5 @@ The application compares the requested movie with each movie in base (can be gen
 The program is printing titles of N movies, that has the biggest rank.
  
 Users must input the path to base (JSON-serialized file), the title of film and a number of recommendations (default is 10).
+
+You can start the application with cmd: `python recommender-system.py`. 
