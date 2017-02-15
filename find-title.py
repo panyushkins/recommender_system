@@ -3,8 +3,8 @@ import json
 
 def read_from_file(file_path):
     with open(file_path, 'r') as file:
-        read_json = json.loads(file.read())
-    return read_json
+        json_file = json.load(file)
+    return json_file
 
 
 def print_titles(films):
