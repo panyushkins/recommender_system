@@ -34,15 +34,16 @@ def compare_films(dict_films, id_film1, id_film2, weight):
                 similar_rating += weight['similar_lists']
 
     similar_rating *= dict_films[id_film2]['popularity']
-    return {similar_rating: dict_films[id_film2]['title']}
+    return {similar_rating: [dict_films[id_film2]['title']]}
 
 
 def print_rates(rate_dict, print_items):
     printed_items = 0
-    for j in sorted(rate_dict, reverse=True):
-        if printed_items < print_items:
-            print(rates[j])
-            printed_items += 1
+    for rate_position in sorted(rate_dict, reverse=True):
+        for film in rates[rate_position]:
+            if printed_items < print_items:
+                print(film)
+                printed_items += 1
 
 
 rating_weight = {'similar_genre': 2, 'similar_countries': 1, 'similar_lists': 5}
@@ -62,7 +63,12 @@ if __name__ == '__main__':
 
     for film_number in films:
         if film_number != id_of_film:
-            rates.update(compare_films(films, id_of_film, film_number, rating_weight))  # fix updating with similar key
+            rate = compare_films(films, id_of_film, film_number, rating_weight)
+            for key_rate in rate:
+                if key_rate not in rates:
+                    rates.update(rate)
+                else:
+                    rates[key_rate].append(rate[key_rate][0])
 
     print()
     print_rates(rates, number_of_recommend_films)
