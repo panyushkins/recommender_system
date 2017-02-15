@@ -9,7 +9,7 @@ In this application you can get budget by film ID from TMDB.
 Firstly, you need input your API key from TMDB. Secondly - TMDB's film ID. 
 After execution of the program, the budget will be printed in console. 
 
-####Make film base (`make-film-base.py`)
+####Make film base (`make-film-db.py`)
 The application downloads information about 1000 first films to dict-type variable, serializes it to JSON and saves it to file.
 
 User should input TMDB's API key, and a path to saved file. When application completed in console will be printed "Data saved to [destination-file-path]"
