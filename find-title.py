@@ -1,10 +1,4 @@
-import json
-
-
-def read_from_file(file_path):
-    with open(file_path, 'r') as file:
-        json_file = json.load(file)
-    return json_file
+import helpers
 
 
 def print_titles(films):
@@ -15,5 +9,5 @@ def print_titles(films):
 if __name__ == '__main__':
     path = input('Input path to file: ')
     word = input('Input a word from film title: ')
-    films_dict = read_from_file(path)
+    films_dict = helpers.read_from_file(path)
     print_titles(films_dict)

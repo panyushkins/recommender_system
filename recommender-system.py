@@ -1,11 +1,5 @@
-import json
 import sys
-
-
-def read_from_file(file_path):
-    with open(file_path, 'r') as file:
-        read_json = json.loads(file.read())
-    return read_json
+import helpers
 
 
 def get_movie_id(movie_title):
@@ -21,23 +15,23 @@ def get_movie_id(movie_title):
         return film_id
 
 
-def compare_films(dict_films, id_film1, id_film2):
+def compare_films(dict_films, id_film1, id_film2, weight):
     similar_rating = float(0)
 
     for first_genre in dict_films[id_film1]['genres']:
         for second_genre in dict_films[id_film2]['genres']:
             if first_genre['id'] == second_genre['id']:
-                similar_rating += 2
+                similar_rating += weight['similar_genre']
 
     for first_country in dict_films[id_film1]['production_countries']:
         for second_country in dict_films[id_film2]['production_countries']:
             if first_country['iso_3166_1'] == second_country['iso_3166_1']:
-                similar_rating += 1
+                similar_rating += weight['similar_countries']
 
-    for t in dict_films[id_film1]['results']:
-        for k in dict_films[id_film2]['results']:
-            if t['id'] == k['id']:
-                similar_rating += 5
+    for first_list in dict_films[id_film1]['results']:
+        for second_list in dict_films[id_film2]['results']:
+            if first_list['id'] == second_list['id']:
+                similar_rating += weight['similar_lists']
 
     similar_rating *= dict_films[id_film2]['popularity']
     return {similar_rating: dict_films[id_film2]['title']}
@@ -51,9 +45,11 @@ def print_rates(rate_dict, print_items):
             printed_items += 1
 
 
+rating_weight = {'similar_genre': 2, 'similar_countries': 1, 'similar_lists': 5}
+
 if __name__ == '__main__':
     rates = {}
-    films = read_from_file(input('Input path to file: '))
+    films = helpers.read_from_file(input('Input path to file: '))
     title = input('Input a film title: ')
 
     number_of_recommend_films = input('Input a number of recommend films: ')
@@ -66,7 +62,7 @@ if __name__ == '__main__':
 
     for film_number in films:
         if film_number != id_of_film:
-            rates.update(compare_films(films, id_of_film, film_number))  # fix updating with similar key
+            rates.update(compare_films(films, id_of_film, film_number, rating_weight))  # fix updating with similar key
 
     print()
     print_rates(rates, number_of_recommend_films)
