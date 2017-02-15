@@ -22,24 +22,20 @@ def make_tmdb_api_request(method, api_key, extra_params=None):
 
 def save_to_file(file_name, save_file):
     with open(file_name, 'w') as file:
-        file.write(save_file)
-    print('Data saved to ' + file_name)
+        json.dump(save_file, file)
 
 
 def download_films(token):
     films = dict()
-    i = 1
-    while len(films) < 1000:
+    for i in range(1, 1001):
         try:
             films[i] = make_tmdb_api_request(method='/movie/' + str(i), api_key=token)
             get_lists = make_tmdb_api_request(method='/movie/' + str(i) + '/lists', api_key=token)
             films[i].update(get_lists)
-            i += 1
 
         except urllib.error.HTTPError as e:
             if e.code == 404:  # если 404 - пропускаем этот ID
                 i += 1
-    print('Downloaded!')
     return films
 
 
@@ -47,6 +43,7 @@ if __name__ == '__main__':
     api_token = input('Input API key: ')
     filename = input('Input destination path to file: ')
 
-    Films_dict = download_films(api_token)
-    serialized_films = json.dumps(Films_dict)
-    save_to_file(filename, serialized_films)
+    films_dict = download_films(api_token)
+    print('Downloaded!')
+    save_to_file(filename, films_dict)
+    print('Data saved to ' + filename)
