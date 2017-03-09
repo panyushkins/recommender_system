@@ -17,8 +17,8 @@ def download_films(token):
             get_lists = helpers.make_tmdb_api_request(method='/movie/' + str(i) + '/lists', api_key=token)
             films[i].update(get_lists)
 
-        except urllib.error.HTTPError as e:
-            if e.code == 404:  # если 404 - пропускаем этот ID
+        except urllib.error.HTTPError as error:
+            if error.code == 404:  # если 404 - пропускаем этот ID
                 i += 1
     return films
 
