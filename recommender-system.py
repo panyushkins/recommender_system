@@ -70,5 +70,4 @@ if __name__ == '__main__':
                 else:
                     rates[key_rate].append(rate[key_rate][0])
 
-    print()
     print_rates(rates, number_of_recommend_films)
